@@ -1,10 +1,11 @@
 from bs4 import BeautifulSoup as soup
+from argparse import ArgumentParser
 import requests, json, pickle, os
 
-WEBHOOK_URL = "https://discordapp.com/api/webhooks/386373923383803905/HwxJmcLPofmVMtbI6k5KkD87ZAd3gyL30YxjfMZ2t09dogbb_mzoJKcsN9PmLAX5kKQZ"
+WEBHOOK_URL = ""
 NEWS_URL = "http://granbluefantasy.jp/news/"
 PICKLED_FILE = "data_guraburu_news"
-ABS_DIR = os.path.dirname(os.path.abspath(__file__)))
+ABS_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def post_on_discord(message):
     """Discordへメッセージを投稿する。"""
@@ -47,16 +48,10 @@ def get_saved_articles():
 
     return saved_articles
 
+def get_new_articles(articles, saved_articles):
+    """取得したニュースと過去のニュースを比較して新しい記事を返す"""
+    new_articles = []
 
-def run_delivery_service():
-    """メイン処理。最新ニュースがあれば,、それをDiscordに投稿する"""
-    # サイトから現在のニュース記事を取得する
-    articles = get_articles()
-
-    # 過去に取得して保存したニュース記事のデータを取得する
-    saved_articles = get_saved_articles()
-
-    # 現在と以前の状態を比較して新しい記事があるか探す
     for article in articles:
         new_article_flg = True
         href = str(article['href']) # データ保存の際にうまくいかないので型を文字列に変換する
@@ -67,29 +62,59 @@ def run_delivery_service():
                 new_article_flg = False;
                 break
 
-        if(new_article_flg):
-            # 新しい記事であればデータとして残す & Discordに投稿
+        if new_article_flg:
+            new_article = {
+                'title': title,
+                'href': href,
+            }
+            new_articles.insert(0, new_article)
+
+    return new_articles
+
+
+def run_delivery_service(args):
+    """メイン処理。最新ニュースがあれば,、それをDiscordに投稿する"""
+    # サイトから現在のニュース記事を取得する
+    articles = get_articles()
+
+    # 過去に取得して保存したニュース記事のデータを取得する
+    saved_articles = get_saved_articles()
+
+    # 新しいニュースを取得する
+    new_articles = get_new_articles(articles, saved_articles)
+
+    if args.readonly:
+        # オプション引数が指定されていれば記事をマージするだけ
+        saved_articles = new_articles + saved_articles
+    else:
+        # Discordに投稿する
+        for article in new_articles:
             try:
                 # まずDiscordに投稿
-                message = title + "\n\n" + href
+                message = article['title'] + "\n\n" + article['href']
                 post_on_discord(message)
             except Exception:
                 pass
             else:
                 # 投稿完了したら記事データを保存する
-                new_article = {
-                    'title': title,
-                    'href': href,
-                }
-                saved_articles.insert(0, new_article)
+                saved_articles.insert(0, article)
 
-    # 最新10件のデータだけ残して保存する
-    saved_articles = saved_articles[0: 10];
+
+    # 最新20件のデータだけ残して保存する
+    saved_articles = saved_articles[0: 20];
     with open(os.path.join(ABS_DIR, PICKLED_FILE), 'wb') as f:
         pickle.dump(saved_articles, f)
 
     return True
 
+def get_option():
+    "オプション引数の取得"
+    argparser = ArgumentParser()
+    argparser.add_argument('-r', '--readonly', action='store_true',
+                           help='Readonly flag')
+
+    return argparser.parse_args();
 
 if __name__ == '__main__':
-    run_delivery_service()
+    args = get_option()
+    run_delivery_service(args)

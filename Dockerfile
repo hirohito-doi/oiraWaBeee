@@ -11,8 +11,9 @@ RUN pip3 install requests beautifulsoup4
 COPY ./guraburu_news_delivery.py /var/docker_dir/guraburu_news_delivery.py
 
 # 初期データを作成するために実行
+RUN python3 /var/docker_dir/guraburu_news_delivery.py -r
 
 # crontで定期実行
-# RUN apt-get install -y cron
-#RUN echo '0 * * * * python3 /var/docker_dir/guraburu_news_delivery.py' >> /etc/crontab
-#CMD ["cron", "-f"]
+RUN apt-get install -y cron
+RUN echo '*/5 * * * * python3 /var/docker_dir/guraburu_news_delivery.py' >> /etc/crontab
+CMD ["cron", "-f"]
