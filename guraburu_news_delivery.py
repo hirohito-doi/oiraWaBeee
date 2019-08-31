@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup as soup
 from argparse import ArgumentParser
 import requests, json, pickle, os
 
-WEBHOOK_URL = ""
+WEBHOOK_URL = "https://discordapp.com/api/webhooks/386719307721080852/srvCJutmuGFoiMLViIoJCL7vGTcaAeg9XsPqzKO4ULNNHVben9P3p9C7j0ONJkxpO3SE"
 NEWS_URL = "http://granbluefantasy.jp/news/"
 PICKLED_FILE = "data_guraburu_news"
 ABS_DIR = os.path.dirname(os.path.abspath(__file__))

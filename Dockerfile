@@ -15,5 +15,5 @@ RUN python3 /var/docker_dir/guraburu_news_delivery.py -r
 
 # crontで定期実行
 RUN apt-get install -y cron
-RUN echo '*/5 * * * * python3 /var/docker_dir/guraburu_news_delivery.py' >> /etc/crontab
+RUN echo '*/5 * * * * root python3 /var/docker_dir/guraburu_news_delivery.py' >> /etc/crontab
 CMD ["cron", "-f"]
