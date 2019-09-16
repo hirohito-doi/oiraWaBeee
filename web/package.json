@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --mode=development",
-    "webpac-prod": "webpack",
-    "watch": "webpack --watch --mode=development"
+    "webpack-prod": "webpack",
+    "watch": "webpack --watch"
   },
   "author": "",
   "license": "ISC",

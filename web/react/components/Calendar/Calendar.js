@@ -11,7 +11,6 @@ class Calendar extends React.Component {
     // 今月の分はあらかじめ計算する
     const { year, month } = this.getTargetYearMonth();
     const calendar = {[year]: {}};
-    console.log(calendar)
     calendar[year][month] = this.calcCalendarByMonth(year, month);
 
     // 初期化
@@ -74,9 +73,6 @@ class Calendar extends React.Component {
       targetDate: m.format()
     }
 
-    console.log(year)
-    console.log(month)
-
     // カレンダーデータが存在しなければ新しく生成する
     let newCalendar = {...calendar}
     if(!(year in newCalendar)) {
@@ -98,8 +94,6 @@ class Calendar extends React.Component {
   render() {
     const { calendar, targetDate } = this.state;
     const {year, month} = this.getTargetYearMonth(targetDate)
-    console.log(year)
-    console.log(month)
     const monthCalendar = calendar[year][month];
 
     return (
@@ -111,6 +105,8 @@ class Calendar extends React.Component {
         <CalendarBody
           targetDate={targetDate}
           monthCalendar={monthCalendar}
+          year={year}
+          month={month}
         />
       </div>
     )
