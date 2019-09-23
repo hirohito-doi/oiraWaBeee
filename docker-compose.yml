@@ -15,6 +15,13 @@ services:
       context: "./web"
     expose:
       - "80"
-    command: /bin/sh -c "uvicorn app:api --host 0.0.0.0 --port 80  --debug"
+    command: /bin/sh -c "uvicorn app:api --host 0.0.0.0 --port 80"
     volumes:
       - "./web:/var/source/web"
+  discord:
+    hostname: discord
+    build:
+      context: "./discord"
+    volumes:
+      - "./web:/var/source/web"
+      - "./discord:/var/source/discord"

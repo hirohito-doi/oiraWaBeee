@@ -2,12 +2,17 @@
   "name": "oira-wa-beeee",
   "version": "1.0.0",
   "description": "I am not a lizard.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hirohito-doi/oiraWaBeee"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --mode=development",
     "webpack-prod": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "format": "prettier --write 'react/*.js'"
   },
   "author": "",
   "license": "ISC",
@@ -20,9 +25,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "prettier": "^1.18.2",
     "webpack-cli": "^3.3.7"
   }
 }

@@ -45,6 +45,7 @@ const useStyles = makeStyles(theme => ({
     opacity: .4
   },
   activeMessage: {
+    minHeight: 75,
     padding: 10
   },
   avatar: {
@@ -88,7 +89,7 @@ const useStyles = makeStyles(theme => ({
  * @param {*} props
  */
 const DayContainer = (props) => {
-  const { year, month, day, index } = props;
+  const { year, month, day, dateSelects, toggleDateSelect, index } = props;
   const classes = useStyles();
 
   const m = moment({y:year, M:month, d:day});
@@ -105,10 +106,16 @@ const DayContainer = (props) => {
 
   // 今日より前の日付か
   let classDay = `${classes.day}`;
-  let handleClick = ()=>{console.log('ok')}
+  let handleClick = ()=>{toggleDateSelect(m.format('YYYY-MM-DD'))}
   if(m.isBefore(now, 'day')) {
     classDay += ` ${classes.dayBefore}`
     handleClick = ()=>{}
+  }
+
+  // 選択済みチェック
+  let isSelected = false;
+  if(!m.isBefore(now, 'day') && dateSelects.indexOf(m.format('YYYY-MM-DD')) >= 0) {
+    isSelected = true;
   }
 
   return (
@@ -126,14 +133,16 @@ const DayContainer = (props) => {
           {day}
         </Badge>
       </Typography>
-      {day &&
-        <CardContent className={classes.activeMessage}>
-          <Avatar className={classes.avatar} alt="Beeee" src="/static/beeee.jpg" />
-          <Typography className={classes.message} variant="caption" display="block">
-            まかせろぁ！
-          </Typography>
-        </CardContent>
-      }
+      <CardContent className={classes.activeMessage}>
+        {day && isSelected &&
+          <React.Fragment>
+            <Avatar className={classes.avatar} alt="Beeee" src="/static/beeee.jpg" />
+            <Typography className={classes.message} variant="caption" display="block">
+              まかせろぁ！
+            </Typography>
+          </React.Fragment>
+        }
+      </CardContent>
     </CardActionArea>
   )
 }
