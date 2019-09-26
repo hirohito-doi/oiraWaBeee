@@ -1,9 +1,6 @@
-# Usage
-とりあえずの使用法
-1. Dockerが使える環境でイメージを作成する
+# OiraWaBeeee
 
-```$ docker build -t oira_wa_beeee:x.xx ./```
+Beeeeくんがプレイヤーを古戦場から逃がさないように色々通知してくれるぞ。
 
-2. コンテナを起動させる
-
-```$ docker container run -d oira_wa_beeee:x.xx```
+# Installation
+docker-compose up -d

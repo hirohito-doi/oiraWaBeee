@@ -1,7 +1,7 @@
 import responder
 import datetime, pickle
 
-PICKLED_FILE = "./data/dateSelects"
+PICKLED_FILE = "/data/dateSelects"
 
 api = responder.API(static_dir='./static')
 

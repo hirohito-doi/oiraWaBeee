@@ -18,6 +18,7 @@ services:
     command: /bin/sh -c "uvicorn app:api --host 0.0.0.0 --port 80"
     volumes:
       - "./web:/var/source/web"
+      - "datavolume:/data"
   discord:
     hostname: discord
     build:
@@ -25,3 +26,7 @@ services:
     volumes:
       - "./web:/var/source/web"
       - "./discord:/var/source/discord"
+      - "datavolume:/data"
+
+volumes:
+  datavolume:

@@ -5,7 +5,8 @@ FROM python:3.7-alpine
 COPY requirements.txt /opt/discord/
 RUN pip install --no-cache-dir -r /opt/discord/requirements.txt
 
-RUN apk --no-cache add tzdata && \
+RUN apk update && \
+    apk --no-cache add tzdata && \
     cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     apk del tzdata
 
