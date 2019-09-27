@@ -1,5 +1,5 @@
-.vscode
+.vscode/
+__pycache__/
 /web/node_modules/
-/web/__pycache__/
 !.gitkeep
 /discord/config.ini
