@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Card } from '@material-ui/core';
 
 import WeekHeader from '../molecules/WeekHeader';
-import DayContent from '../atoms/DayContent';
+import WeekContent from '../molecules/WeekContent';
 
 const useStyles = makeStyles(theme => ({
   calendar: {
@@ -11,37 +11,8 @@ const useStyles = makeStyles(theme => ({
     width: 750,
     padding: 25,
     margin: "auto"
-  },
-  week: {
-    display: "flex",
-    justifyContent: "center",
-    borderBottom: "solid 1px #ddd",
-    '&:last-child': {
-      borderBottom: 'none'
-    }
   }
 }));
-
-/**
- * 週表示
- * @param {*} props
- */
-const WeekContainer = (props) => {
-  const { week, targetDate } = props;
-  const classes = useStyles();
-  return (
-    <div className={classes.week}>
-      {week.map((day, index) => (
-        <DayContent
-          key={`${targetDate}-${index}`}
-          {...props}
-          index={index}
-          day={day}
-        />
-      ))}
-    </div>
-  )
-}
 
 /**
  * カレンダー
@@ -55,7 +26,7 @@ const Calendar = (props) => {
     <Card className={classes.calendar}>
       <WeekHeader />
       {monthCalendar.map((week, index) => (
-        <WeekContainer
+        <WeekContent
           key={`${targetDate}-${index}`}
           {...props}
           week={week}

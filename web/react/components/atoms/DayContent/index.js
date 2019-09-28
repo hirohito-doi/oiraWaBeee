@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
     color: "#303f9f"
   },
   day: {
+    textAlign: 'center',
     width: 100,
     height: 100,
     borderRight: "solid 1px #ddd",

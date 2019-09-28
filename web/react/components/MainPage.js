@@ -1,9 +1,12 @@
 import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import moment from 'moment'
-import Header from './Header';
-import Calendar from './Calendar';
 
-class Scheduler extends React.Component {
+import {getTargetYearMonth, calcCalendarByMonth } from '../services/CalendarService'
+import Header from './organisms/Header';
+import Calendar from './organisms/Calendar';
+
+class MainPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -13,9 +16,9 @@ class Scheduler extends React.Component {
 
     // カレンダー情報
     // 今月の分はあらかじめ計算する
-    const { year, month } = this.getTargetYearMonth();
+    const { year, month } = getTargetYearMonth();
     const calendar = {[year]: {}};
-    calendar[year][month] = this.calcCalendarByMonth(year, month);
+    calendar[year][month] = calcCalendarByMonth(year, month);
 
     // 初期化
     this.state = {
@@ -41,45 +44,6 @@ class Scheduler extends React.Component {
   }
 
   /**
-   * 文字列から対応する年と月を返す
-   */
-  getTargetYearMonth(mFormat) {
-    const m = moment(mFormat);
-    return {
-      year : m.year(),
-      month: m.month()
-    }
-  }
-
-  /**
-   * カレンダー用の配列を生成する
-   */
-  calcCalendarByMonth(year, month) {
-    let calendar = [];
-    const m = moment({y: year, M: month});
-
-    const emptyWeek = [null, null, null, null, null, null, null]; // 週のテンプレ
-    const count = m.daysInMonth(); // 月の日数
-
-    for(let i=1; i <= count; i++) {
-      const dm = moment({y: year, M: month, d: i});
-      const weekDay = dm.weekday();
-
-      // 1日目か日曜日の場合に新しい週の配列を追加する
-      if(i==1 || weekDay == 0) {
-        calendar.push([...emptyWeek]);
-      }
-
-      const weekCount = calendar.length;
-
-      // 配列に該当日を追加する
-      calendar[weekCount-1][weekDay] = i;
-    }
-
-    return calendar;
-  }
-
-  /**
    * 月を切り替える
    */
   changeMonth(year, month) {
@@ -96,7 +60,7 @@ class Scheduler extends React.Component {
     }
 
     if(!(month in newCalendar[year])) {
-      newCalendar[year][month] = this.calcCalendarByMonth(year, month);
+      newCalendar[year][month] = calcCalendarByMonth(year, month);
       newState = {
         ...newState,
         calendar: newCalendar
@@ -139,27 +103,34 @@ class Scheduler extends React.Component {
 
   render() {
     const { calendar, targetDate, dateSelects } = this.state;
-    const {year, month} = this.getTargetYearMonth(targetDate)
+    const {year, month} = getTargetYearMonth(targetDate)
     const monthCalendar = calendar[year][month];
 
     return (
-      <div className="calendar-container" style={{minWidth: 600, textAlign: "center"}}>
-        <Header
-          targetDate={targetDate}
-          changeMonth={this.changeMonth}
-        />
-        <Calendar
-          targetDate={targetDate}
-          dateSelects={dateSelects}
-          monthCalendar={monthCalendar}
-          year={year}
-          month={month}
-          toggleDateSelect={this.toggleDateSelect}
-        />
+      <div className="landing-page">
+        <CssBaseline />
+        <main className="page-content">
+          <div className="main-content">
+            <div className="calendar-container" style={{minWidth: 600, textAlign: "center"}}>
+              <Header
+                targetDate={targetDate}
+                changeMonth={this.changeMonth}
+              />
+              <Calendar
+                targetDate={targetDate}
+                dateSelects={dateSelects}
+                monthCalendar={monthCalendar}
+                year={year}
+                month={month}
+                toggleDateSelect={this.toggleDateSelect}
+              />
+            </div>
+          </div>
+        </main>
       </div>
     )
   }
 
 }
 
-export default Scheduler;
+export default MainPage;

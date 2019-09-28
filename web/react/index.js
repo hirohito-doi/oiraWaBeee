@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
 
-import Page from "./components/Page";
+import MainPage from "./components/MainPage";
 
-render(<Page />, document.querySelector("#root"));
+render(<MainPage />, document.querySelector("#root"));

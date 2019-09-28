@@ -1,5 +1,6 @@
+npm-debug.log
 .vscode/
 __pycache__/
-/web/node_modules/
+node_modules/
 !.gitkeep
 /discord/config.ini
