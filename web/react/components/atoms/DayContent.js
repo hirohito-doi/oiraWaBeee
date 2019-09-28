@@ -1,32 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardActionArea, CardContent, Typography, Avatar, Badge } from '@material-ui/core';
+import { CardActionArea, CardContent, Typography, Avatar, Badge } from '@material-ui/core';
 import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
-  calendarBody: {
-    // border: "solid 1px #ddd"
-    width: 750,
-    padding: 25,
-    margin: "auto"
-  },
-  weekNames: {
-    display: "flex",
-    justifyContent: "center"
-  },
-  dayOfWeek: {
-    width:100,
-    height: 40,
-    borderRadius: 0,
-  },
-  week: {
-    display: "flex",
-    justifyContent: "center",
-    borderBottom: "solid 1px #ddd",
-    '&:last-child': {
-      borderBottom: 'none'
-    }
-  },
   sunday: {
     color: "#c51162"
   },
@@ -88,14 +65,14 @@ const useStyles = makeStyles(theme => ({
  * 日表示
  * @param {*} props
  */
-const DayContainer = (props) => {
+const DayContent = (props) => {
   const { year, month, day, dateSelects, toggleDateSelect, index } = props;
   const classes = useStyles();
 
   const m = moment({y:year, M:month, d:day});
   const now = moment();
 
-  // 日付が表示用クラス設定
+  // 曜日表示の色分け
   let classDayColor = "";
   if (index==0) { // 日曜日
     classDayColor += ` ${classes.sunday}`;
@@ -147,76 +124,4 @@ const DayContainer = (props) => {
   )
 }
 
-/**
- * 週表示
- * @param {*} props
- */
-const WeekContainer = (props) => {
-  const { week, targetDate } = props;
-  const classes = useStyles();
-  return (
-    <div className={classes.week}>
-      {week.map((day, index) => (
-        <DayContainer
-          key={`${targetDate}-${index}`}
-          {...props}
-          index={index}
-          day={day}
-        />
-      ))}
-    </div>
-  )
-}
-
-/**
- * 曜日表示
- */
-const WeekNames = () => {
-  const names = ["日", "月", "火", "水", "木", "金", "土",];
-  const classes = useStyles();
-  return (
-    <div className={classes.weekNames}>
-      {names.map((name, index) => {
-        let classWeek = `${classes.dayOfWeek}`;
-        if (index==0) { // 日曜日
-          classWeek += ` ${classes.sunday}`;
-        } 
-        if (index==6) { // 土曜日
-          classWeek += ` ${classes.satruday}`;
-        }
-
-        return(
-          <Typography
-            key={name}
-            className={classWeek}
-          >
-            {name}
-          </Typography>
-        )
-      })}
-    </div>
-  )
-}
-
-/**
- * カレンダー
- * @param {*} props
- */
-const CalendarBody = (props) => {
-  const { monthCalendar, targetDate } = props;
-  const classes = useStyles();
-  return (
-    <Card className={classes.calendarBody}>
-      <WeekNames />
-      {monthCalendar.map((week, index) => (
-        <WeekContainer
-          key={`${targetDate}-${index}`}
-          {...props}
-          week={week}
-        />
-      ))}
-    </Card>
-  )
-}
-
-export default CalendarBody;
+export default DayContent;

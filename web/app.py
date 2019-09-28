@@ -13,7 +13,7 @@ class DateSelectsAPI:
         model = DateSelects()
         dateSelects = model.get_all()
 
-        resp.headers = {"Content-Type": "application/json; charset=utf-8"} 
+        resp.headers = {"Content-Type": "application/json; charset=utf-8"}
         resp.media = {"dateSelects": dateSelects}
 
     def on_post(self, req, resp, *, date):
@@ -21,7 +21,7 @@ class DateSelectsAPI:
         ret = model.add_data(date)
 
         # 返す値を設定する
-        resp.headers = {"Content-Type": "application/json; charset=utf-8"} 
+        resp.headers = {"Content-Type": "application/json; charset=utf-8"}
         resp.media = {"status": ret}
 
     def on_delete(self, req, resp, *, date):
@@ -29,10 +29,9 @@ class DateSelectsAPI:
         ret = model.delete_data(date)
 
         # 返す値を設定する
-        resp.headers = {"Content-Type": "application/json; charset=utf-8"} 
+        resp.headers = {"Content-Type": "application/json; charset=utf-8"}
         resp.media = {"status": ret}
 
 
 if __name__ == '__main__':
     api.run()
-    

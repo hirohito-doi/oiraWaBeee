@@ -24,7 +24,6 @@ services:
     build:
       context: "./discord"
     volumes:
-      - "./web:/var/source/web"
       - "./discord:/var/source/discord"
       - "datavolume:/data"
 

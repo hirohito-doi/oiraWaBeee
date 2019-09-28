@@ -39,7 +39,7 @@ class DateSelects():
         # 不要になった過去データを削除する
         today = datetime.date.today()
         date_selects = [
-            x for x in date_selects if datetime.date.fromisoformat(x) > today
+            x for x in date_selects if datetime.date.fromisoformat(x) >= today
         ]
 
         return self.save_pickled_data(date_selects)
@@ -56,7 +56,7 @@ class DateSelects():
         # 不要になった過去データを削除する
         today = datetime.date.today()
         date_selects = [
-            x for x in date_selects if datetime.date.fromisoformat(x) > today
+            x for x in date_selects if datetime.date.fromisoformat(x) >= today
         ]
 
         return self.save_pickled_data(date_selects)

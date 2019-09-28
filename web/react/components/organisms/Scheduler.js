@@ -1,9 +1,9 @@
 import React from 'react';
 import moment from 'moment'
-import CalendarHeader from './CalendarHeader';
-import CalendarBody from './CalendarBody';
+import Header from './Header';
+import Calendar from './Calendar';
 
-class Calendar extends React.Component {
+class Scheduler extends React.Component {
   constructor(props) {
     super(props);
 
@@ -144,11 +144,11 @@ class Calendar extends React.Component {
 
     return (
       <div className="calendar-container" style={{minWidth: 600, textAlign: "center"}}>
-        <CalendarHeader
+        <Header
           targetDate={targetDate}
           changeMonth={this.changeMonth}
         />
-        <CalendarBody
+        <Calendar
           targetDate={targetDate}
           dateSelects={dateSelects}
           monthCalendar={monthCalendar}
@@ -162,4 +162,4 @@ class Calendar extends React.Component {
 
 }
 
-export default Calendar;
+export default Scheduler;

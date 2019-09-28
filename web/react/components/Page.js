@@ -1,6 +1,6 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Calendar from './Calendar/Calendar';
+import Calendar from './organisms/Scheduler';
 
 const Page = () => {
   return (
