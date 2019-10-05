@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DayContent render correctory 1`] = `
+<button
+  className="MuiButtonBase-root MuiCardActionArea-root makeStyles-day-3"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex={0}
+  type="button"
+>
+  <p
+    className="MuiTypography-root  makeStyles-sunday-1 MuiTypography-body1"
+  >
+    <span
+      className="MuiBadge-root makeStyles-badge-7"
+    >
+      10
+      <span
+        className="MuiBadge-badge MuiBadge-colorSecondary MuiBadge-invisible MuiBadge-dot"
+      >
+        
+      </span>
+    </span>
+  </p>
+  <div
+    className="MuiCardContent-root makeStyles-activeMessage-5"
+  />
+  <span
+    className="MuiCardActionArea-focusHighlight"
+  />
+</button>
+`;
