@@ -26,7 +26,7 @@ describe('DayContent', () => {
     const m = moment();
 
     const tree = mount(<DayContent
-      changeMonth={changeMonthSpy}
+      changeMonth={onClick}
       year={m.year()}
       month={m.month()}
       day={m.date()}
