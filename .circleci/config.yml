@@ -8,6 +8,8 @@ jobs:
 
     steps:
       - checkout
+      
+      - cd ./web
 
       # Download and cache dependencies
       - restore_cache:
