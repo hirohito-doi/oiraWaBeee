@@ -3,6 +3,7 @@
 exports[`DayContent render correctory 1`] = `
 <button
   className="MuiButtonBase-root MuiCardActionArea-root makeStyles-day-3"
+  disabled={false}
   onBlur={[Function]}
   onClick={[Function]}
   onDragLeave={[Function]}
@@ -26,7 +27,7 @@ exports[`DayContent render correctory 1`] = `
     >
       10
       <span
-        className="MuiBadge-badge MuiBadge-colorSecondary MuiBadge-invisible MuiBadge-dot"
+        className="MuiBadge-badge MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorSecondary MuiBadge-invisible MuiBadge-dot"
       >
         
       </span>

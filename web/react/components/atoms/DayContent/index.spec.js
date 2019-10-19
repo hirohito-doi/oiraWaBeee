@@ -26,7 +26,6 @@ describe('DayContent', () => {
     const m = moment();
 
     const tree = mount(<DayContent
-      changeMonth={changeMonthSpy}
       year={m.year()}
       month={m.month()}
       day={m.date()}
@@ -36,7 +35,7 @@ describe('DayContent', () => {
     />)
 
     // チェック済テスト
-    expect(tree.hasClass('MuiAvatar-img')).toEqual(true);
+    expect(tree.find('.MuiAvatar-img').length).toBe(1);
     expect(tree.text()).toMatch('まかせろぁ！');
 
     // クリックテスト
