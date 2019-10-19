@@ -2,7 +2,7 @@
 
 exports[`ButtonThisMonth render correctory 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root makeStyles-buttonThisMonth-1 MuiButton-outlined MuiButton-outlinedPrimary"
+  className="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-buttonThisMonth-1 MuiButton-outlinedPrimary"
   disabled={false}
   onBlur={[Function]}
   onClick={[Function]}
