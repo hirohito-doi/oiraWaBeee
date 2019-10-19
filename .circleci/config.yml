@@ -9,6 +9,8 @@ jobs:
 
     steps:
       - checkout
+      
+      - cd ./web
 
       # Download and cache dependencies
       - restore_cache:
@@ -30,3 +32,4 @@ jobs:
       - run: 
           working_directory: web
           command: npm run test
+
